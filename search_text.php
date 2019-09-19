@@ -10,7 +10,6 @@ $result = $myDB->query($sql);
 
 if ($result->num_rows > 0) {
 
-//	echo $result;
 	//output data of row
 	while ($row = $result->fetch_assoc()) {
 		echo $row["Class Name"] . " A+ " . $row["A+"] . "<br>";
