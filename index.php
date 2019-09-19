@@ -1,11 +1,50 @@
+<!DOCTYPE html>
+<html>
+   <body>
+
+
 <?php
-	if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-		$uri = 'https://';
-	} else {
-		$uri = 'http://';
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbName = "courses_except_engr";
+
+// Create connection
+$myDB = new mysqli($servername, $username, $password, $dbName);
+
+// Check connection
+if ($myDB->connect_error) {
+    die("Connection failed: " . $myDB->connect_error);
+}
+echo "Connected successfully \n";
+
+echo $myDB->host_info;
+
+$sql = "SELECT 'Class Name', Workload, 'A+', FROM myTable";
+$result = $myDB->query($sql);
+
+
+
+if ($result->num_rows) {
+
+	echo $result;
+}
+/*	//output data of row
+	while ($row = $result->fetch_assoc()) {
+		echo "class name " . $row["Class Name"] . " " . "Workload " . $row["Workload"] . " " . "grade " . $row["A+"] . "<br>";
+
 	}
-	$uri .= $_SERVER['HTTP_HOST'];
-	header('Location: '.$uri.'/dashboard/');
-	exit;
+}
+else {
+	echo "no results mate";
+}*/
+
 ?>
-Something is wrong with the XAMPP installation :-(
+
+
+    	<p>Welcome to viveks website</p>
+    
+
+
+    </body>
+</html>
