@@ -4,47 +4,25 @@
 
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbName = "courses_except_engr";
 
-// Create connection
-$myDB = new mysqli($servername, $username, $password, $dbName);
-
-// Check connection
-if ($myDB->connect_error) {
-    die("Connection failed: " . $myDB->connect_error);
-}
-echo "Connected successfully \n";
-
-echo $myDB->host_info;
-
-$sql = "SELECT 'Class Name', Workload, 'A+', FROM myTable";
-$result = $myDB->query($sql);
-
-
-
-if ($result->num_rows) {
-
-	echo $result;
-}
-/*	//output data of row
-	while ($row = $result->fetch_assoc()) {
-		echo "class name " . $row["Class Name"] . " " . "Workload " . $row["Workload"] . " " . "grade " . $row["A+"] . "<br>";
-
-	}
-}
-else {
-	echo "no results mate";
-}*/
+//include "database_connection.php";
 
 ?>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    	<p>Welcome to viveks website</p>
-    
+<!-- The form -->
+<h3>Search for Classes!<h3>
+<form class="example" action="search_text.php">
+  <input type="text" placeholder="Enter % of A+'s.." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form>
 
+<?php
+
+//include "search_text.php";
+
+?>
 
     </body>
 </html>
