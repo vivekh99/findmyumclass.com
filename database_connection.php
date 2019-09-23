@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbName = "courses_except_engr";
+$dbName = "f19-um-courses";
 
 // Create connection
 $myDB = new mysqli($servername, $username, $password, $dbName);
