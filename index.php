@@ -1,8 +1,76 @@
 
-<?php
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel= "stylesheet" href="search_bar_style.css">
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	</head>
+   <body>
+   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+		
+<!-- 
+ClassName
+Desire_to_Take
+Understanding
+Workload
+A+
+A
+A-
+B+
+B
+B-
+C+
+C
+C-
+D+
+D
+D-
+E -->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- The form -->
+	<h3 class="header">Search for Classes!<h3>
+		<div class="search-bar">
+			<form id="searchForm" class="search-fields" action="" method="post">
+				<!-- <input id="searchDesire" class="searchbox1" type="text" placeholder="Desire to Take %" name="desire_to_take">
+				<input id="searchUnderstanding" class="searchbox2" type="text" placeholder="Understanding %" name="understanding"> -->
+				<input id="searchWorkload" class="searchbox3" type="text" placeholder="Workload %" name="workload">
+				<input id="searchAplus" class="searchbox4" type="text" placeholder="% of A+'s" name="num_Aplus">
+				<!-- <input id="searchA" class="searchbox5" type="text" placeholder="% of A's" name="num_A">
+				<input id="searchAminus" class="searchbox6" type="text" placeholder="% of A-'s" name="num_Aminus">
+				<input id="searchBplus" class="searchbox7" type="text" placeholder="% of B+'s" name="num_Bplus">
+				<input id="searchB" class="searchbox8" type="text" placeholder="% of B's" name="num_B">
+				<input id="searchBminus" class="searchbox9" type="text" placeholder="% of B-'s" name="num_Bminus">
+				<input id="searchCplus" class="searchbox10" type="text" placeholder="% of C+'s" name="num_Cplus"> -->
+				<!-- <input id="searchC" class="searchbox11" type="text" placeholder="% of C's" name="num_C">
+				<input id="searchCminus" class="searchbox12" type="text" placeholder="% of C-'s" name="num_Cminus"> -->
+				<button id="searchBtn" class="search-btn" type="submit" name="submitBtn"><i class="fas fa-search"></i></button>
+			</form>
+		</div>
+		<button id="addSearchParameter">+ Add</button>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+		<script>
+			var workload = "<input id="searchWorkload" class="searchbox3" type="text" placeholder="Workload %" name="workload">";
+			var $submit = 0;
+			
+			$(function() {
+				//$('form').sortable();
+			
+				$('#searchBtn').click(function(){
+					$submit = 1;
+				});
+
+		</script>
+
+		<?php
 	include "database_connection.php";
 //search database for input
-if(isset($submit)){
+if ( isset( $_POST['submitBtn'] ) ) { 
 	$by_desire_to_take = $_POST['desire_to_take'];
 	$by_understanding = $_POST['understanding'];
 	$by_workload = $_POST['workload'];
@@ -94,55 +162,5 @@ $myDB->close();
 }
 
 ?>
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<link rel= "stylesheet" href="search_bar_style.css">
-		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-	</head>
-   <body>
-
-
-<!-- 
-ClassName
-Desire_to_Take
-Understanding
-Workload
-A+
-A
-A-
-B+
-B
-B-
-C+
-C
-C-
-D+
-D
-D-
-E -->
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- The form -->
-	<h3 class="header">Search for Classes!<h3>
-		<div class="search-bar">
-			<form class="search-fields" action="search_text.php" method="post">
-				<input class="searchbox1" type="text" placeholder="Desire to Take %" name="desire_to_take">
-				<input class="searchbox2" type="text" placeholder="Understanding %" name="understanding">
-				<input class="searchbox3" type="text" placeholder="Workload %" name="workload">
-				<input class="searchbox4" type="text" placeholder="% of A+'s" name="num_Aplus">
-				<input class="searchbox5" type="text" placeholder="% of A's" name="num_A">
-				<input class="searchbox6" type="text" placeholder="% of A-'s" name="num_Aminus">
-				<input class="searchbox7" type="text" placeholder="% of B+'s" name="num_Bplus">
-				<input class="searchbox8" type="text" placeholder="% of B's" name="num_B">
-				<input class="searchbox9" type="text" placeholder="% of B-'s" name="num_Bminus">
-				<input class="searchbox10" type="text" placeholder="% of C+'s" name="num_Cplus">
-				<input class="searchbox11" type="text" placeholder="% of C's" name="num_C">
-				<input class="searchbox12" type="text" placeholder="% of C-'s" name="num_Cminus">
-				<button class="searchbtn" type="submit"><i class="fas fa-search"></i></button>
-			</form>
-		</div>
 	</body>
 </html>
