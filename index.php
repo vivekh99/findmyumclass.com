@@ -71,17 +71,15 @@ E -->
 			<tr class="header-list">
 				<th class="coursename">Course Name</th>
 				<th>Workload</th>
-				<th>% of A+</th>
-				<th>% of A</th>
-				<th>% of A-</th>
-				<th>% of B+</th>
-				<th>% of B</th>
-				<th>% of B-</th>
+				<th>% of A+'s</th>
+				<th>% of A's</th>
+				<th>% of A-'s</th>
+				<th>% of B+'s</th>
+				<th>% of B's</th>
+				<th>% of B-'s</th>
 			</tr>
 		</thead>
-	</table>	
-
-	<tbody class="search-results">		
+	
 		<?php
 
 		include "database_connection.php";
@@ -149,7 +147,7 @@ E -->
 				$sql .= " WHERE " . implode(' AND ', $conditions);
 			}
 
-			echo $sql;
+//			echo $sql;
 
 			echo "<br>";
 			echo "<br>";
@@ -163,9 +161,24 @@ E -->
 			
 				//output data of row
 				while ($row = $result->fetch_assoc()) {
-					echo $row["ClassName"] . " Desire_to_Take " . $row["Desire_to_Take"]
-					. " Understanding " . $row["Understanding"] . " Workload " . $row["Workload"] . " A+ " . $row["A+"]
-					. " A " . $row["A"] . " A- " . $row["A-"] . " B+ " . $row["B+"] . " B " . $row["B"] . " B- " . $row["B-"] . "<br>";
+					?>
+					<!-- <table class="search-results-in-table-format"> -->
+						<tr>
+							<td><!--<a href="www.google.com" target="_blank">--><?php echo $row["ClassName"]?><!--</a>--></td>
+							<td><?php echo $row["Workload"]?></td>
+							<td><?php echo $row["A+"]?></td>
+							<td><?php echo $row["A"]?></td>
+							<td><?php echo $row["A-"]?></td>
+							<td><?php echo $row["B+"]?></td>
+							<td><?php echo $row["B"]?></td>
+							<td><?php echo $row["B-"] . "<br>"?></td>
+						</tr>
+					<!-- <table> -->
+					
+					<?php
+					// echo $row["ClassName"] . " Desire_to_Take " . $row["Desire_to_Take"]
+					// . " Understanding " . $row["Understanding"] . " Workload " . $row["Workload"] . " A+ " . $row["A+"]
+					// . " A " . $row["A"] . " A- " . $row["A-"] . " B+ " . $row["B+"] . " B " . $row["B"] . " B- " . $row["B-"] . "<br>";
 				}
 			}
 			else {
@@ -177,7 +190,7 @@ E -->
 		}
 
 		?>
-	</tbody>
+	</table>	
 
 	</body>
 </html>
