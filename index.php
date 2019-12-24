@@ -29,9 +29,15 @@ D-
 E -->
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- The form -->
-	<h3 class="header">Search for Classes!<h3>
+	<h3 class="header">Search for Classes! <br>
+	How to use: Search for classes based on workload or grade percentages. <br>
+	You do not have to enter a value into every parameter.	<br>
+
+	Note: <br>
+	If a value is designated as "NA" it means "Not Available" and the data did not exist at the time OR the value is less than 1%
+	</h3>
 		<div class="search-bar">
 			<form id="searchForm" class="search-fields" action="" method="post">
 				<!-- <input id="searchDesire" class="searchbox1" type="text" placeholder="Desire to Take %" name="desire_to_take">
@@ -70,7 +76,7 @@ E -->
 		<thead>
 			<tr class="header-list">
 				<th class="coursename">Course Name</th>
-				<th>Workload</th>
+				<th>Workload %</th>
 				<th>% of A+'s</th>
 				<th>% of A's</th>
 				<th>% of A-'s</th>
@@ -110,11 +116,12 @@ E -->
 			// if(! empty($by_understanding)) {
 			// $conditions[] = "`Understanding` >= $by_understanding";
 			// }
+
 			if(! empty($by_workload)) {
-			$conditions[] = "`Workload` <= $by_workload";
+				$conditions[] = "`Workload` <= $by_workload";
 			}
 			if(! empty($by_Aplus)) {
-			$conditions[] = "`A+` >= $by_Aplus";
+				$conditions[] = "`A+` >= $by_Aplus";
 			}
 			// if(! empty($by_num_A)) {
 			// 	$conditions[] = "`A` >= $by_num_A";
@@ -149,8 +156,8 @@ E -->
 
 //			echo $sql;
 
-			echo "<br>";
-			echo "<br>";
+			// echo "<br>";
+			// echo "<br>";
 			//$result = mysql_query($sql);
 
 
@@ -165,8 +172,24 @@ E -->
 					<!-- <table class="search-results-in-table-format"> -->
 						<tr>
 							<td><!--<a href="www.google.com" target="_blank">--><?php echo $row["ClassName"]?><!--</a>--></td>
-							<td><?php echo $row["Workload"]?></td>
-							<td><?php echo $row["A+"]?></td>
+							<td><?php 
+								if($row["Workload"] == 0){
+									echo "NA";
+								}
+								else{
+									echo $row["Workload"];
+								}
+								?>
+							</td>
+							<td><?php 
+								if($row["A+"] == 0){
+									echo "NA";
+								}
+								else{
+									echo $row["A+"];
+								}
+								?>
+							</td>
 							<td><?php echo $row["A"]?></td>
 							<td><?php echo $row["A-"]?></td>
 							<td><?php echo $row["B+"]?></td>
