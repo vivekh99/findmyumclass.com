@@ -9,10 +9,24 @@ body {
 }
 
 .header {
-    text-align: center;
+    text-align: center; 
+    color: black;
     
 }
 
+.search-results-table{
+    position: absolute;
+    width: 1000px;
+    color: #00274C;
+    left: 15%;
+    top: 85%;
+
+}
+
+
+.search-results{
+    color: black;
+}
 .search-bar{
     position: absolute;
     top: 50%;
@@ -48,7 +62,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.4s;
+    transition: 1.0s;
     color: yellow;
     cursor: pointer;
    }

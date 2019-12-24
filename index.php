@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel= "stylesheet" href="search_bar_style.css">
+		<link rel="stylesheet" type="text/css" href="search_bar_style.css" />
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 	</head>
-   <body>
-   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+   	<body>
+   <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> -->
 
 		
 <!-- 
@@ -43,15 +43,15 @@ E -->
 				<input id="searchBplus" class="searchbox7" type="text" placeholder="% of B+'s" name="num_Bplus">
 				<input id="searchB" class="searchbox8" type="text" placeholder="% of B's" name="num_B">
 				<input id="searchBminus" class="searchbox9" type="text" placeholder="% of B-'s" name="num_Bminus">
-				<input id="searchCplus" class="searchbox10" type="text" placeholder="% of C+'s" name="num_Cplus"> -->
-				<!-- <input id="searchC" class="searchbox11" type="text" placeholder="% of C's" name="num_C">
+				<input id="searchCplus" class="searchbox10" type="text" placeholder="% of C+'s" name="num_Cplus"> 
+				<input id="searchC" class="searchbox11" type="text" placeholder="% of C's" name="num_C">
 				<input id="searchCminus" class="searchbox12" type="text" placeholder="% of C-'s" name="num_Cminus"> -->
 				<button id="searchBtn" class="search-btn" type="submit" name="submitBtn"><i class="fas fa-search"></i></button>
 			</form>
 		</div>
-		<button id="addSearchParameter">+ Add</button>
+		<!-- <button id="addSearchParameter">+ Add</button> -->
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 		<script>
@@ -65,102 +65,119 @@ E -->
 					$submit = 1;
 				});
 
-		</script>
+		</script> -->
+	<table class="search-results-table">
+		<thead>
+			<tr class="header-list">
+				<th class="coursename">Course Name</th>
+				<th>Workload</th>
+				<th>% of A+</th>
+				<th>% of A</th>
+				<th>% of A-</th>
+				<th>% of B+</th>
+				<th>% of B</th>
+				<th>% of B-</th>
+			</tr>
+		</thead>
+	</table>	
 
+	<tbody class="search-results">		
 		<?php
-	include "database_connection.php";
-//search database for input
-if ( isset( $_POST['submitBtn'] ) ) { 
-	$by_desire_to_take = $_POST['desire_to_take'];
-	$by_understanding = $_POST['understanding'];
-	$by_workload = $_POST['workload'];
-	$by_Aplus = $_POST['num_Aplus'];
-	$by_num_A = $_POST['num_A'];
-	$by_num_Aminus = $_POST['num_Aminus'];
-	$by_num_Bplus = $_POST['num_Bplus'];
-	$by_num_B = $_POST['num_B'];
-	$by_num_Bminus = $_POST['num_Bminus'];
-	$by_num_Cplus = $_POST['num_Cplus'];
-	$by_num_C = $_POST['num_C'];
-	$by_num_Cminus = $_POST['num_Cminus'];
-	
 
-    //Do real escaping here
+		include "database_connection.php";
+		//search database for input
+		if ( isset( $_POST['submitBtn'] ) ) { 
+			// $by_desire_to_take = $_POST['desire_to_take'];
+			// $by_understanding = $_POST['understanding'];
+			$by_workload = $_POST['workload'];
+			$by_Aplus = $_POST['num_Aplus'];
+			// $by_num_A = $_POST['num_A'];
+			// $by_num_Aminus = $_POST['num_Aminus'];
+			// $by_num_Bplus = $_POST['num_Bplus'];
+			// $by_num_B = $_POST['num_B'];
+			// $by_num_Bminus = $_POST['num_Bminus'];
+			// // $by_num_Cplus = $_POST['num_Cplus'];
+			// $by_num_C = $_POST['num_C'];
+			// $by_num_Cminus = $_POST['num_Cminus'];
+			
 
-    $query = "SELECT * FROM courses"; //WHERE `A+` >= $by_Aplus AND `Workload` <= $by_workload";
-    $conditions = array();
+			//ADD escaping here!!!!!!!!!!!!!!!!!
 
-    if(! empty($by_desire_to_take)) {
-      $conditions[] = "`Desire_to_Take` >= $by_desire_to_take";
-    }
-    if(! empty($by_understanding)) {
-      $conditions[] = "`Understanding` >= $by_understanding";
-    }
-    if(! empty($by_workload)) {
-      $conditions[] = "`Workload` <= $by_workload";
-    }
-    if(! empty($by_Aplus)) {
-      $conditions[] = "`A+` >= $by_Aplus";
-	}
-	if(! empty($by_num_A)) {
-		$conditions[] = "`A` >= $by_num_A";
-	}
-	if(! empty($by_num_Aminus)) {
-		$conditions[] = "`A-` >= $by_num_Aminus";
-	}
-	if(! empty($by_num_Bplus)) {
-		$conditions[] = "`B+` >= $by_num_Bplus";
-	}
-	if(! empty($by_num_B)) {
-		$conditions[] = "`B` >= $by_num_B";
-	}
-	if(! empty($by_num_Bminus)) {
-		$conditions[] = "`B-` >= $by_num_Bminus";
-	}
-	if(! empty($by_num_Cplus)) {
-		$conditions[] = "`C+` >= $by_num_Cplus";
-	}
-	if(! empty($by_num_C)) {
-		$conditions[] = "`C` >= $by_num_C";
-	}
-	if(! empty($by_num_Cminus)) {
-		$conditions[] = "`C-` >= $by_num_Cminus";
-	}
+			$query = "SELECT * FROM courses"; //WHERE `A+` >= $by_Aplus AND `Workload` <= $by_workload";
+			$conditions = array();
 
-
-    $sql = $query;
-    if (count($conditions) > 0) {
-    	$sql .= " WHERE " . implode(' AND ', $conditions);
-    }
-
-	echo $sql;
-
-	echo "<br>";
-	echo "<br>";
-    //$result = mysql_query($sql);
+			// if(! empty($by_desire_to_take)) {
+			// $conditions[] = "`Desire_to_Take` >= $by_desire_to_take";
+			// }
+			// if(! empty($by_understanding)) {
+			// $conditions[] = "`Understanding` >= $by_understanding";
+			// }
+			if(! empty($by_workload)) {
+			$conditions[] = "`Workload` <= $by_workload";
+			}
+			if(! empty($by_Aplus)) {
+			$conditions[] = "`A+` >= $by_Aplus";
+			}
+			// if(! empty($by_num_A)) {
+			// 	$conditions[] = "`A` >= $by_num_A";
+			// }
+			// if(! empty($by_num_Aminus)) {
+			// 	$conditions[] = "`A-` >= $by_num_Aminus";
+			// }
+			// if(! empty($by_num_Bplus)) {
+			// 	$conditions[] = "`B+` >= $by_num_Bplus";
+			// }
+			// if(! empty($by_num_B)) {
+			// 	$conditions[] = "`B` >= $by_num_B";
+			// }
+			// if(! empty($by_num_Bminus)) {
+			// 	$conditions[] = "`B-` >= $by_num_Bminus";
+			// }
+			// if(! empty($by_num_Cplus)) {
+			// 	$conditions[] = "`C+` >= $by_num_Cplus";
+			// }
+			// if(! empty($by_num_C)) {
+			// 	$conditions[] = "`C` >= $by_num_C";
+			// }
+			// if(! empty($by_num_Cminus)) {
+			// 	$conditions[] = "`C-` >= $by_num_Cminus";
+			// }
 
 
-	$result = $myDB->query($sql);
-	
+			$sql = $query;
+			if (count($conditions) > 0) {
+				$sql .= " WHERE " . implode(' AND ', $conditions);
+			}
 
-	if ($result->num_rows > 0) {
-	
-		//output data of row
-		while ($row = $result->fetch_assoc()) {
-			echo $row["ClassName"] . " Desire_to_Take " . $row["Desire_to_Take"]
-			 . " Understanding " . $row["Understanding"] . " Workload " . $row["Workload"] . " A+ " . $row["A+"]
-			  . " A " . $row["A"] . " A- " . $row["A-"] . " B+ " . $row["B+"] . " B " . $row["B"] . " B- " . $row["B-"] . " C+ " . $row["C+"]
-			   . " C " . $row["C"] . " C- " . $row["C-"] . "<br>";
+			echo $sql;
+
+			echo "<br>";
+			echo "<br>";
+			//$result = mysql_query($sql);
+
+
+			$result = $myDB->query($sql);
+			
+
+			if ($result->num_rows > 0) {
+			
+				//output data of row
+				while ($row = $result->fetch_assoc()) {
+					echo $row["ClassName"] . " Desire_to_Take " . $row["Desire_to_Take"]
+					. " Understanding " . $row["Understanding"] . " Workload " . $row["Workload"] . " A+ " . $row["A+"]
+					. " A " . $row["A"] . " A- " . $row["A-"] . " B+ " . $row["B+"] . " B " . $row["B"] . " B- " . $row["B-"] . "<br>";
+				}
+			}
+			else {
+				echo "no results mate";
+			}
+
+
+		$myDB->close();
 		}
-	}
-	else {
-		echo "no results mate";
-	}
 
+		?>
+	</tbody>
 
-$myDB->close();
-}
-
-?>
 	</body>
 </html>
