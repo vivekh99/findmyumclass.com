@@ -36,7 +36,9 @@ E -->
 	You do not have to enter a value into every parameter.	<br>
 
 	Note: <br>
-	If a value is designated as "NA" it means "Not Available" and the data did not exist at the time OR the value is less than 1%
+	If a value is designated as "NA" it means "Not Available" and the data did not exist at the time. <br>
+	Not all courses are listed for LSA, however, all courses are listed for CoE. <br>
+	Please use google chrome when using this website.
 	</h3>
 		<div class="search-bar">
 			<form id="searchForm" class="search-fields" action="" method="post">
@@ -44,6 +46,8 @@ E -->
 				<input id="searchUnderstanding" class="searchbox2" type="text" placeholder="Understanding %" name="understanding"> -->
 				<input id="searchWorkload" class="searchbox3" type="text" placeholder="Workload %" name="workload">
 				<input id="searchAplus" class="searchbox4" type="text" placeholder="% of A+'s" name="num_Aplus">
+				<input id="searchCollege" class="searchbox5" type="text" placeholder="College" name="college">
+				
 				<!-- <input id="searchA" class="searchbox5" type="text" placeholder="% of A's" name="num_A">
 				<input id="searchAminus" class="searchbox6" type="text" placeholder="% of A-'s" name="num_Aminus">
 				<input id="searchBplus" class="searchbox7" type="text" placeholder="% of B+'s" name="num_Bplus">
@@ -95,6 +99,7 @@ E -->
 			// $by_understanding = $_POST['understanding'];
 			$by_workload = $_POST['workload'];
 			$by_Aplus = $_POST['num_Aplus'];
+			$by_college = $_POST['college'];
 			// $by_num_A = $_POST['num_A'];
 			// $by_num_Aminus = $_POST['num_Aminus'];
 			// $by_num_Bplus = $_POST['num_Bplus'];
@@ -107,7 +112,7 @@ E -->
 
 			//ADD escaping here!!!!!!!!!!!!!!!!!
 
-			$query = "SELECT * FROM courses"; //WHERE `A+` >= $by_Aplus AND `Workload` <= $by_workload";
+			$query = "SELECT * FROM new_courses"; //WHERE `A+` >= $by_Aplus AND `Workload` <= $by_workload";
 			$conditions = array();
 
 			// if(! empty($by_desire_to_take)) {
@@ -122,6 +127,9 @@ E -->
 			}
 			if(! empty($by_Aplus)) {
 				$conditions[] = "`A+` >= $by_Aplus";
+			}
+			if(! empty($by_college)) {
+				$conditions[] = "College LIKE '%$by_college%'";
 			}
 			// if(! empty($by_num_A)) {
 			// 	$conditions[] = "`A` >= $by_num_A";
@@ -173,7 +181,7 @@ E -->
 						<tr>
 							<td><!--<a href="www.google.com" target="_blank">--><?php echo $row["ClassName"]?><!--</a>--></td>
 							<td><?php 
-								if($row["Workload"] == 0){
+								if($row["Workload"] == -2){
 									echo "NA";
 								}
 								else{
@@ -182,19 +190,80 @@ E -->
 								?>
 							</td>
 							<td><?php 
-								if($row["A+"] == 0){
+								if($row["A+"] == -2){
 									echo "NA";
+								}
+								else if($row["A+"] == -1){
+									echo "<1";
+
 								}
 								else{
 									echo $row["A+"];
 								}
 								?>
 							</td>
-							<td><?php echo $row["A"]?></td>
-							<td><?php echo $row["A-"]?></td>
-							<td><?php echo $row["B+"]?></td>
-							<td><?php echo $row["B"]?></td>
-							<td><?php echo $row["B-"] . "<br>"?></td>
+							<td><?php
+								if($row["A"] == -2){
+									echo "NA";
+								}
+								else if($row["A"] == -1){
+									echo "<1";
+
+								}
+								else{
+									echo $row["A"];
+								}
+								?>
+							</td>
+							<td><?php
+								if($row["A-"] == -2){
+									echo "NA";
+								}
+								else if($row["A-"] == -1){
+									echo "<1";
+
+								}
+								else{
+									echo $row["A-"];
+								}
+								?></td>
+							<td><?php
+								if($row["B+"] == -2){
+									echo "NA";
+								}
+								else if($row["B+"] == -1){
+									echo "<1";
+
+								}
+								else{
+									echo $row["B+"];
+								}
+								?></td>
+							<td><?php
+								if($row["B"] == -2){
+									echo "NA";
+								}
+								else if($row["B"] == -1){
+									echo "<1";
+
+								}
+								else{
+									echo $row["B"];
+								}
+								?></td>
+							<td><?php
+								if($row["B-"] == -2){
+									echo "NA";
+								}
+								else if($row["B-"] == -1){
+									echo "<1";
+
+								}
+								else{
+									echo $row["B-"];
+								}
+								echo "<br>"?>
+							</td>
 						</tr>
 					<!-- <table> -->
 					
