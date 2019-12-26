@@ -43,16 +43,32 @@ E -->
 		<div class="search-bar">
 			<form id="searchForm" class="search-fields" action="" method="post">
 				<input id="searchWorkload" class="searchbox3" type="text" placeholder="Workload %" name="workload">
-				<input id="searchAplus" class="searchbox4" type="text" placeholder="% of A+'s" name="num_Aplus">
+				<input id="searchArange" class="searchbox14" type="text" placeholder="% of A- & Above" name="num_Arange">
 				<input id="searchCollege" class="searchbox5" type="text" placeholder="Department" name="college">
+					<div class="advanced-search-box"  id="advanced-search-box">
+		
+						<input id="searchDesire" class="searchbox1" type="text" placeholder="Desire to Take %" name="desire_to_take">
+						<input id="searchUnderstanding" class="searchbox2" type="text" placeholder="Understanding %" name="understanding">
+						<input id="searchAplus" class="searchbox4" type="text" placeholder="% of A+'s" name="num_Aplus">
+						<input id="searchA" class="searchbox6" type="text" placeholder="% of A's" name="num_A">
+						<input id="searchAminus" class="searchbox7" type="text" placeholder="% of A-'s" name="num_Aminus">
+						<input id="searchBplus" class="searchbox8" type="text" placeholder="% of B+'s" name="num_Bplus">
+						<input id="searchB" class="searchbox9" type="text" placeholder="% of B's" name="num_B">
+						<input id="searchBminus" class="searchbox10" type="text" placeholder="% of B-'s" name="num_Bminus">
+						<input id="searchCplus" class="searchbox11" type="text" placeholder="% of C+'s" name="num_Cplus"> 
+						<input id="searchC" class="searchbox12" type="text" placeholder="% of C's" name="num_C">
+						<input id="searchCminus" class="searchbox13" type="text" placeholder="% of C-'s" name="num_Cminus">
+
+					</div>
 				<button id="searchBtn" class="search-btn" type="submit" name="submitBtn"><i class="fas fa-search"></i></button>
 			</form>
 		</div>
 		<button class="advanced-search" id="adv-search-btn">Advanced Search</button>
-		<div class="advanced-search-box"  id="advanced-search-box">
+		<!-- <div class="advanced-search-box"  id="advanced-search-box">
 			<form>
 				<input id="searchDesire" class="searchbox1" type="text" placeholder="Desire to Take %" name="desire_to_take">
 				<input id="searchUnderstanding" class="searchbox2" type="text" placeholder="Understanding %" name="understanding">
+				<input id="searchAplus" class="searchbox4" type="text" placeholder="% of A+'s" name="num_Aplus">
 				<input id="searchA" class="searchbox6" type="text" placeholder="% of A's" name="num_A">
 				<input id="searchAminus" class="searchbox7" type="text" placeholder="% of A-'s" name="num_Aminus">
 				<input id="searchBplus" class="searchbox8" type="text" placeholder="% of B+'s" name="num_Bplus">
@@ -61,11 +77,9 @@ E -->
 				<input id="searchCplus" class="searchbox11" type="text" placeholder="% of C+'s" name="num_Cplus"> 
 				<input id="searchC" class="searchbox12" type="text" placeholder="% of C's" name="num_C">
 				<input id="searchCminus" class="searchbox13" type="text" placeholder="% of C-'s" name="num_Cminus">
+				
 			</form>
-		</div>
-
-		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+		</div> -->
 
 		<script>
 			var advSearchBtn = document.getElementById("adv-search-btn");
@@ -99,8 +113,9 @@ E -->
 			$by_desire_to_take = $_POST['desire_to_take'];
 			$by_understanding = $_POST['understanding'];
 			$by_workload = $_POST['workload'];
-			$by_Aplus = $_POST['num_Aplus'];
 			$by_college = $_POST['college'];
+			$by_Arange = $_POST['num_Arange'];
+			$by_Aplus = $_POST['num_Aplus'];
 			$by_num_A = $_POST['num_A'];
 			$by_num_Aminus = $_POST['num_Aminus'];
 			$by_num_Bplus = $_POST['num_Bplus'];
@@ -125,18 +140,28 @@ E -->
 			if(! empty($by_workload)) {
 				$conditions[] = "`Workload` <= $by_workload";
 			}
-			if(! empty($by_Aplus)) {
-				$conditions[] = "`A+` >= $by_Aplus";
-			}
 			if(! empty($by_college)) {
 				$conditions[] = "College LIKE '%$by_college%'";
 			}
-			if(! empty($by_num_A)) {
-				$conditions[] = "`A` >= $by_num_A";
+
+			if(!empty($by_Arange)) {
+				$conditions[] = "`A+` <= $by_Arange";
+				$conditions[] = "`A` <= $by_Arange";
+				$conditions[] = "`A-` <= $by_Arange";
 			}
-			if(! empty($by_num_Aminus)) {
-				$conditions[] = "`A-` >= $by_num_Aminus";
-			}
+			else{
+				if(!empty($by_Aplus)) {
+					$conditions[] = "`A+` >= $by_Aplus";
+				}
+				if(!empty($by_num_A)) {
+					$conditions[] = "`A` >= $by_num_A";
+				}
+				if(!empty($by_num_Aminus)) {
+					$conditions[] = "`A-` >= $by_num_Aminus";
+				}
+	
+
+			} 
 			if(! empty($by_num_Bplus)) {
 				$conditions[] = "`B+` >= $by_num_Bplus";
 			}
@@ -162,7 +187,7 @@ E -->
 				$sql .= " WHERE " . implode(' AND ', $conditions);
 			}
 
-//			echo $sql;
+			echo $sql;
 
 			// echo "<br>";
 			// echo "<br>";
@@ -190,6 +215,8 @@ E -->
 								?>
 							</td>
 							<td><?php 
+
+							//DO SOME SHITE HERE FOR THE A RANGE
 								if($row["A+"] == -2){
 									echo "NA";
 								}

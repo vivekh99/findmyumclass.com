@@ -64,6 +64,7 @@ th {
 } 
 
 .search-btn {
+   
     color: #e84118;
     float: right;
     width: 40px;
@@ -93,12 +94,12 @@ th {
 }
 
 .advanced-search-box{
-    position: absolute;
+    position: flex;
     display: none;
     background: white;
     border-radius: 10px;
     outline: none;
-    top: 60%;
+    top: 80%;
     width: 55%;
     left: 35%;
 }
@@ -271,6 +272,19 @@ th {
 
 
 .searchbox13 {
+    border: none;
+    background: none;
+    outline: none;
+    padding-top: 2px;
+    padding-left: 1px;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    color: #00274C;
+
+}
+
+.searchbox14 {
     border: none;
     background: none;
     outline: none;
