@@ -47,35 +47,37 @@ E -->
 				<input id="searchWorkload" class="searchbox3" type="text" placeholder="Workload %" name="workload">
 				<input id="searchAplus" class="searchbox4" type="text" placeholder="% of A+'s" name="num_Aplus">
 				<input id="searchCollege" class="searchbox5" type="text" placeholder="College" name="college">
-				
-				<!-- <input id="searchA" class="searchbox5" type="text" placeholder="% of A's" name="num_A">
-				<input id="searchAminus" class="searchbox6" type="text" placeholder="% of A-'s" name="num_Aminus">
-				<input id="searchBplus" class="searchbox7" type="text" placeholder="% of B+'s" name="num_Bplus">
-				<input id="searchB" class="searchbox8" type="text" placeholder="% of B's" name="num_B">
-				<input id="searchBminus" class="searchbox9" type="text" placeholder="% of B-'s" name="num_Bminus">
-				<input id="searchCplus" class="searchbox10" type="text" placeholder="% of C+'s" name="num_Cplus"> 
-				<input id="searchC" class="searchbox11" type="text" placeholder="% of C's" name="num_C">
-				<input id="searchCminus" class="searchbox12" type="text" placeholder="% of C-'s" name="num_Cminus"> -->
 				<button id="searchBtn" class="search-btn" type="submit" name="submitBtn"><i class="fas fa-search"></i></button>
 			</form>
 		</div>
-		<!-- <button id="addSearchParameter">+ Add</button> -->
+		<button class="advanced-search" id="adv-search-btn">Advanced Search</button>
+		<div class="advanced-search-box"  id="advanced-search-box">
+			<form>
+				<input id="searchA" class="searchbox6" type="text" placeholder="% of A's" name="num_A">
+				<input id="searchAminus" class="searchbox7" type="text" placeholder="% of A-'s" name="num_Aminus">
+				<input id="searchBplus" class="searchbox8" type="text" placeholder="% of B+'s" name="num_Bplus">
+				<input id="searchB" class="searchbox9" type="text" placeholder="% of B's" name="num_B">
+				<input id="searchBminus" class="searchbox10" type="text" placeholder="% of B-'s" name="num_Bminus">
+				<input id="searchCplus" class="searchbox11" type="text" placeholder="% of C+'s" name="num_Cplus"> 
+				<input id="searchC" class="searchbox12" type="text" placeholder="% of C's" name="num_C">
+				<input id="searchCminus" class="searchbox13" type="text" placeholder="% of C-'s" name="num_Cminus">
+			</form>
+		</div>
 
 		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
 
 		<script>
-			var workload = "<input id="searchWorkload" class="searchbox3" type="text" placeholder="Workload %" name="workload">";
-			var $submit = 0;
-			
-			$(function() {
-				//$('form').sortable();
-			
-				$('#searchBtn').click(function(){
-					$submit = 1;
-				});
+			var advSearchBtn = document.getElementById("adv-search-btn");
+			var advancedSearchBox = document.getElementById("advanced-search-box");
 
-		</script> -->
+			advSearchBtn.onclick = function(){
+				advancedSearchBox.style.display = "block";
+			}
+			
+
+		</script> 
+
 	<table class="search-results-table">
 		<thead>
 			<tr class="header-list">
