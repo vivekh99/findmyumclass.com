@@ -33,7 +33,7 @@ E -->
 <!-- The form -->
 	<h3 class="header">Search for Classes! <br>
 	How to use: Search for classes based on workload or grade percentages. <br>
-	You do not have to enter a value into every parameter.	<br>
+	You do NOT have to enter a value into every parameter.	<br>
 
 	Note: <br>
 	If a value is designated as "NA" it means "Not Available" and the data did not exist at the time. <br>
@@ -42,17 +42,17 @@ E -->
 	</h3>
 		<div class="search-bar">
 			<form id="searchForm" class="search-fields" action="" method="post">
-				<!-- <input id="searchDesire" class="searchbox1" type="text" placeholder="Desire to Take %" name="desire_to_take">
-				<input id="searchUnderstanding" class="searchbox2" type="text" placeholder="Understanding %" name="understanding"> -->
 				<input id="searchWorkload" class="searchbox3" type="text" placeholder="Workload %" name="workload">
 				<input id="searchAplus" class="searchbox4" type="text" placeholder="% of A+'s" name="num_Aplus">
-				<input id="searchCollege" class="searchbox5" type="text" placeholder="College" name="college">
+				<input id="searchCollege" class="searchbox5" type="text" placeholder="Department" name="college">
 				<button id="searchBtn" class="search-btn" type="submit" name="submitBtn"><i class="fas fa-search"></i></button>
 			</form>
 		</div>
 		<button class="advanced-search" id="adv-search-btn">Advanced Search</button>
 		<div class="advanced-search-box"  id="advanced-search-box">
 			<form>
+				<input id="searchDesire" class="searchbox1" type="text" placeholder="Desire to Take %" name="desire_to_take">
+				<input id="searchUnderstanding" class="searchbox2" type="text" placeholder="Understanding %" name="understanding">
 				<input id="searchA" class="searchbox6" type="text" placeholder="% of A's" name="num_A">
 				<input id="searchAminus" class="searchbox7" type="text" placeholder="% of A-'s" name="num_Aminus">
 				<input id="searchBplus" class="searchbox8" type="text" placeholder="% of B+'s" name="num_Bplus">
@@ -74,7 +74,6 @@ E -->
 			advSearchBtn.onclick = function(){
 				advancedSearchBox.style.display = "block";
 			}
-			
 
 		</script> 
 
@@ -97,19 +96,19 @@ E -->
 		include "database_connection.php";
 		//search database for input
 		if ( isset( $_POST['submitBtn'] ) ) { 
-			// $by_desire_to_take = $_POST['desire_to_take'];
-			// $by_understanding = $_POST['understanding'];
+			$by_desire_to_take = $_POST['desire_to_take'];
+			$by_understanding = $_POST['understanding'];
 			$by_workload = $_POST['workload'];
 			$by_Aplus = $_POST['num_Aplus'];
 			$by_college = $_POST['college'];
-			// $by_num_A = $_POST['num_A'];
-			// $by_num_Aminus = $_POST['num_Aminus'];
-			// $by_num_Bplus = $_POST['num_Bplus'];
-			// $by_num_B = $_POST['num_B'];
-			// $by_num_Bminus = $_POST['num_Bminus'];
-			// // $by_num_Cplus = $_POST['num_Cplus'];
-			// $by_num_C = $_POST['num_C'];
-			// $by_num_Cminus = $_POST['num_Cminus'];
+			$by_num_A = $_POST['num_A'];
+			$by_num_Aminus = $_POST['num_Aminus'];
+			$by_num_Bplus = $_POST['num_Bplus'];
+			$by_num_B = $_POST['num_B'];
+			$by_num_Bminus = $_POST['num_Bminus'];
+			$by_num_Cplus = $_POST['num_Cplus'];
+			$by_num_C = $_POST['num_C'];
+			$by_num_Cminus = $_POST['num_Cminus'];
 			
 
 			//ADD escaping here!!!!!!!!!!!!!!!!!
@@ -117,13 +116,12 @@ E -->
 			$query = "SELECT * FROM new_courses"; //WHERE `A+` >= $by_Aplus AND `Workload` <= $by_workload";
 			$conditions = array();
 
-			// if(! empty($by_desire_to_take)) {
-			// $conditions[] = "`Desire_to_Take` >= $by_desire_to_take";
-			// }
-			// if(! empty($by_understanding)) {
-			// $conditions[] = "`Understanding` >= $by_understanding";
-			// }
-
+			if(! empty($by_desire_to_take)) {
+			$conditions[] = "`Desire_to_Take` >= $by_desire_to_take";
+			}
+			if(! empty($by_understanding)) {
+			$conditions[] = "`Understanding` >= $by_understanding";
+			}
 			if(! empty($by_workload)) {
 				$conditions[] = "`Workload` <= $by_workload";
 			}
@@ -133,30 +131,30 @@ E -->
 			if(! empty($by_college)) {
 				$conditions[] = "College LIKE '%$by_college%'";
 			}
-			// if(! empty($by_num_A)) {
-			// 	$conditions[] = "`A` >= $by_num_A";
-			// }
-			// if(! empty($by_num_Aminus)) {
-			// 	$conditions[] = "`A-` >= $by_num_Aminus";
-			// }
-			// if(! empty($by_num_Bplus)) {
-			// 	$conditions[] = "`B+` >= $by_num_Bplus";
-			// }
-			// if(! empty($by_num_B)) {
-			// 	$conditions[] = "`B` >= $by_num_B";
-			// }
-			// if(! empty($by_num_Bminus)) {
-			// 	$conditions[] = "`B-` >= $by_num_Bminus";
-			// }
-			// if(! empty($by_num_Cplus)) {
-			// 	$conditions[] = "`C+` >= $by_num_Cplus";
-			// }
-			// if(! empty($by_num_C)) {
-			// 	$conditions[] = "`C` >= $by_num_C";
-			// }
-			// if(! empty($by_num_Cminus)) {
-			// 	$conditions[] = "`C-` >= $by_num_Cminus";
-			// }
+			if(! empty($by_num_A)) {
+				$conditions[] = "`A` >= $by_num_A";
+			}
+			if(! empty($by_num_Aminus)) {
+				$conditions[] = "`A-` >= $by_num_Aminus";
+			}
+			if(! empty($by_num_Bplus)) {
+				$conditions[] = "`B+` >= $by_num_Bplus";
+			}
+			if(! empty($by_num_B)) {
+				$conditions[] = "`B` >= $by_num_B";
+			}
+			if(! empty($by_num_Bminus)) {
+				$conditions[] = "`B-` >= $by_num_Bminus";
+			}
+			if(! empty($by_num_Cplus)) {
+				$conditions[] = "`C+` >= $by_num_Cplus";
+			}
+			if(! empty($by_num_C)) {
+				$conditions[] = "`C` >= $by_num_C";
+			}
+			if(! empty($by_num_Cminus)) {
+				$conditions[] = "`C-` >= $by_num_Cminus";
+			}
 
 
 			$sql = $query;
