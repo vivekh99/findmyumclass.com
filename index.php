@@ -128,7 +128,7 @@ E -->
 
 			//ADD escaping here!!!!!!!!!!!!!!!!!
 
-			$query = "SELECT * FROM new_courses"; //WHERE `A+` >= $by_Aplus AND `Workload` <= $by_workload";
+			$query = "SELECT * FROM new_courses";
 			$conditions = array();
 
 			if(! empty($by_desire_to_take)) {
