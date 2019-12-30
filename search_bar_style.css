@@ -88,7 +88,7 @@ th {
     border: none;
     background: none;
     color: whitesmoke;
-    left: 46.5%;
+    left: 58.25%;
     top: 55%;
     cursor: pointer;
 }
@@ -97,7 +97,7 @@ th {
     position: flex;
     display: none;
     background: white;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     outline: none;
     top: 80%;
     width: 55%;
@@ -133,17 +133,19 @@ th {
 
 
 .searchbox3 {
-    border: none;
+    /* border: none; */
+    border-color: black;
     background: none;
     outline: none;
     padding-top: 2px;
-    padding-left: 1px;
+    padding-left: 3px;
     font-size: 16px;
     transition: 0.4s;
     line-height: 40px;
     color: #00274C;
 
 }
+
 
 .searchbox4 {
     border: none;
@@ -159,11 +161,12 @@ th {
 } 
 
 .searchbox5 {
-    border: none;
+    /* border: none; */
+    border-color: black;
     background: none;
     outline: none;
     padding-top: 2px;
-    padding-left: 1px;
+    padding-left: 3px;
     font-size: 16px;
     transition: 0.4s;
     line-height: 40px;
@@ -285,7 +288,8 @@ th {
 }
 
 .searchbox14 {
-    border: none;
+    /* border: none; */
+    border-color: black;
     background: none;
     outline: none;
     padding-top: 2px;
@@ -296,4 +300,3 @@ th {
     color: #00274C;
 
 }
-

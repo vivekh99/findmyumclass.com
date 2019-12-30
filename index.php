@@ -43,7 +43,7 @@ E -->
 		<div class="search-bar">
 			<form id="searchForm" class="search-fields" action="" method="post">
 				<input id="searchWorkload" class="searchbox3" type="text" placeholder="Workload %" name="workload">
-				<input id="searchArange" class="searchbox14" type="text" placeholder="% of A- & Above" name="num_Arange">
+				<input id="searchArange" class="searchbox14" type="text" placeholder="total % of A+,A,A-" name="num_Arange">
 				<input id="searchCollege" class="searchbox5" type="text" placeholder="Department" name="college">
 					<div class="advanced-search-box"  id="advanced-search-box">
 		
@@ -86,9 +86,8 @@ E -->
 			var advancedSearchBox = document.getElementById("advanced-search-box");
 
 			advSearchBtn.onclick = function(){
-				advancedSearchBox.style.display = "block";
+				advancedSearchBox.style.display = advancedSearchBox.style.display === "block" ? "none" : "block";
 			}
-
 		</script> 
 
 	<table class="search-results-table">
@@ -143,11 +142,14 @@ E -->
 			if(! empty($by_college)) {
 				$conditions[] = "College LIKE '%$by_college%'";
 			}
-
+			
+			$bool_Arange = FALSE;
 			if(!empty($by_Arange)) {
 				$conditions[] = "`A+` <= $by_Arange";
 				$conditions[] = "`A` <= $by_Arange";
 				$conditions[] = "`A-` <= $by_Arange";
+
+				$bool_Arange = TRUE;
 			}
 			else{
 				if(!empty($by_Aplus)) {
@@ -187,7 +189,7 @@ E -->
 				$sql .= " WHERE " . implode(' AND ', $conditions);
 			}
 
-			echo $sql;
+			//echo $sql;
 
 			// echo "<br>";
 			// echo "<br>";
@@ -196,40 +198,66 @@ E -->
 
 			$result = $myDB->query($sql);
 			
+			//echo $result->num_rows;
 
 			if ($result->num_rows > 0) {
 			
 				//output data of row
 				while ($row = $result->fetch_assoc()) {
+
+					$bool_print = TRUE;
+					if($bool_Arange){
+						if(($row["A+"] + $row["A"] + $row["A-"]) < $by_Arange){
+							$bool_print = FALSE;
+						}
+					}
+
+					$course_number = $row["Course_Number"];
+					$college_name =  $row["College"];
+
+
 					?>
 					<!-- <table class="search-results-in-table-format"> -->
 						<tr>
-							<td><!--<a href="www.google.com" target="_blank">--><?php echo $row["ClassName"]?><!--</a>--></td>
+							<td><a href="https://atlas.ai.umich.edu/course/<?php echo "$college_name"; ?>%20<?php echo "$course_number"; ?>/" target="_blank"><?php
+							
+							if($bool_print){
+								echo $row["ClassName"];
+
+							}
+							?><!--</a>-->
+							
+							</td>
 							<td><?php 
+							if($bool_print){
 								if($row["Workload"] == -2){
 									echo "NA";
 								}
 								else{
 									echo $row["Workload"];
 								}
-								?>
+							}
+							?>
 							</td>
 							<td><?php 
 
-							//DO SOME SHITE HERE FOR THE A RANGE
+							if($bool_print){
 								if($row["A+"] == -2){
 									echo "NA";
 								}
 								else if($row["A+"] == -1){
 									echo "<1";
-
 								}
 								else{
 									echo $row["A+"];
 								}
-								?>
+							}
+								
+							?>
 							</td>
 							<td><?php
+
+							if($bool_print){
 								if($row["A"] == -2){
 									echo "NA";
 								}
@@ -240,9 +268,13 @@ E -->
 								else{
 									echo $row["A"];
 								}
-								?>
+							}
+
+							?>
 							</td>
 							<td><?php
+
+							if($bool_print){
 								if($row["A-"] == -2){
 									echo "NA";
 								}
@@ -253,8 +285,13 @@ E -->
 								else{
 									echo $row["A-"];
 								}
-								?></td>
+							}
+
+							?></td>
 							<td><?php
+
+
+							if($bool_print){
 								if($row["B+"] == -2){
 									echo "NA";
 								}
@@ -265,8 +302,11 @@ E -->
 								else{
 									echo $row["B+"];
 								}
-								?></td>
+							}
+							?></td>
 							<td><?php
+
+							if($bool_print){	
 								if($row["B"] == -2){
 									echo "NA";
 								}
@@ -277,8 +317,13 @@ E -->
 								else{
 									echo $row["B"];
 								}
-								?></td>
+							}
+
+							?></td>
 							<td><?php
+
+							if($bool_print){
+
 								if($row["B-"] == -2){
 									echo "NA";
 								}
@@ -289,8 +334,10 @@ E -->
 								else{
 									echo $row["B-"];
 								}
-								echo "<br>"?>
-							</td>
+								echo "<br>";
+							}	
+								
+							?></td>
 						</tr>
 					<!-- <table> -->
 					
